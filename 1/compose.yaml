@@ -1,0 +1,6 @@
+services:
+    c1:
+        build: image
+        container_name: exercice1_container
+        volumes:
+         - C:/Users/gael-/Documents/ESIEA/docker/exercice5/1/image/data:/data

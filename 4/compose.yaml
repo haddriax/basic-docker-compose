@@ -1,0 +1,14 @@
+services:
+    postgres:
+        image: postgres
+        container_name: exercice4_postgres
+        env_file:
+            -   .env
+        ports:
+            -   "3030:3030"
+    client:
+        build: image
+        container_name: exercice4_client
+        entrypoint: /bin/sh
+        stdin_open: true
+        tty: true

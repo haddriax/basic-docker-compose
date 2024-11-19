@@ -1,0 +1,22 @@
+services:
+    c1:
+        image: postgres
+        env_file:
+            -   db_password.txt
+        container_name: exercice3_1_container
+        ports:
+            -   "3030:3030"
+        volumes:
+         - C:/Users/gael-/Documents/ESIEA/docker/exercice5/3/data:/var/lib/postgresql/data
+    c2:
+        image: postgres
+        env_file:
+            -   db_password.txt
+        container_name: exercice3_2_container
+        ports:
+            -   "3031:3030"
+        volumes:
+         - application-volume:/var/lib/postgresql/data
+volumes:
+    application-volume:
+        external: false

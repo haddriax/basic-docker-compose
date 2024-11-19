@@ -1,0 +1,6 @@
+services:
+    c2:
+        build: image
+        container_name: exercice2_container
+        ports:
+            -   "3030:3030"
