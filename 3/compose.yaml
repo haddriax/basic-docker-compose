@@ -23,7 +23,7 @@ services:
     ports:
       - "5433:5432"
     volumes:
-      - data:/var/lib/postgresql/data
+      - postgres2_data:/var/lib/postgresql/data
 
   postgres3:
     image: postgres
@@ -40,7 +40,7 @@ services:
       - postgres3_data:/var/lib/postgresql/data
 
 volumes:
-  data:
+  postgres2_data:
     driver: local
   postgres3_data:
     driver: local
