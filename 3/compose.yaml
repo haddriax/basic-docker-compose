@@ -1,22 +1,50 @@
 services:
-    c1:
-        image: postgres
-        env_file:
-            -   db_password.txt
-        container_name: exercice3_1_container
-        ports:
-            -   "3030:3030"
-        volumes:
-         - C:/Users/gael-/Documents/ESIEA/docker/exercice5/3/data:/var/lib/postgresql/data
-    c2:
-        image: postgres
-        env_file:
-            -   db_password.txt
-        container_name: exercice3_2_container
-        ports:
-            -   "3031:3030"
-        volumes:
-         - application-volume:/var/lib/postgresql/data
+  postgres1:
+    image: postgres
+    container_name: postgres1
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_PASSWORD: /run/secrets/db_password
+    secrets:
+      - db_password
+    ports:
+      - "5432:5432"
+
+  postgres2:
+    image: postgres
+    container_name: postgres2
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_PASSWORD: /run/secrets/db_password
+    secrets:
+      - db_password
+    ports:
+      - "5433:5432"
+    volumes:
+      - data:/var/lib/postgresql/data
+
+  postgres3:
+    image: postgres
+    container_name: postgres3
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_PASSWORD: /run/secrets/db_password
+    secrets:
+      - db_password
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres3_data:/var/lib/postgresql/data
+
 volumes:
-    application-volume:
-        external: false
+  data:
+    driver: local
+  postgres3_data:
+    driver: local
+
+secrets:
+  db_password:
+    file: ./db_password.txt
