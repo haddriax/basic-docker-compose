@@ -1,14 +1,42 @@
 services:
     postgres:
         image: postgres
-        container_name: exercice4_postgres
-        env_file:
-            -   .env
+        container_name: postgres
+        environment:
+          POSTGRES_USER: ${POSTGRES_USER}
+          POSTGRES_DB: ${POSTGRES_DB}
+          POSTGRES_PASSWORD: /run/secrets/db_password
+        secrets:
+            - db_password
         ports:
-            -   "3030:3030"
+            - "3030:3030"
+        networks:
+            - network1
+
     client:
         build: image
-        container_name: exercice4_client
+        container_name: client
         entrypoint: /bin/sh
         stdin_open: true
         tty: true
+        networks:
+            - network1
+
+    client2:
+        build: image
+        container_name: client2
+        entrypoint: /bin/sh
+        stdin_open: true
+        tty: true
+        networks:
+            - network2
+
+secrets:
+  db_password:
+    file: ./db_password.txt
+
+networks:
+    network1:
+        driver: bridge
+    network2:
+        driver: bridge
