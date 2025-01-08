@@ -1,2 +1,2 @@
 # basic-docker-compose
-Basic uses of Docker Compose.
+Collections of exercices with docker-compose
